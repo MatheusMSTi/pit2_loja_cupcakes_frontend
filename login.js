@@ -10,7 +10,7 @@ loginForm.addEventListener('submit', async (e) => {
     const password = document.getElementById('password').value;
 
     loginMessage.textContent = 'Autenticando...';
-    loginMessage.style.color = '#5e320fff';
+    loginMessage.style.color = '#0a960aff';
 
     try {
         const response = await fetch(API_LOGIN_URL, {
