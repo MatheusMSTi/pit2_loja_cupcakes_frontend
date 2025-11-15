@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Carrinho - MiauCupcake Café</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .cart-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .cart-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-title-group">
+            <h1><a href="index.html" style="color: white; text-decoration: none;">MiauCupcake Café</a></h1>
+            <img id="header-icon" src="URL_DA_IMAGEM_PEQUENA_GATO_AQUI" alt="Ícone de Gato">
+        </div>
+        
+        <nav>
+            <a href="index.html">Catálogo</a>
+            <a href="carrinho.html">Carrinho</a> <a href="login.html">Login/Admin</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Meu Carrinho de Compras</h2>
+        <div class="cart-container">
+            <div id="cart-list">
+                <p>O carrinho está vazio.</p>
+            </div>
+            <button onclick="limparCarrinho()">Limpar Carrinho</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Loja de Cupcakes. PIT2.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', loadCarrinho);
+
+        function loadCarrinho() {
+            const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            const cartList = document.getElementById('cart-list');
+            cartList.innerHTML = ''; 
+
+            if (carrinho.length === 0) {
+                cartList.innerHTML = '<p style="text-align: center;">O carrinho está vazio. Adicione um cupcake!</p>';
+                return;
+            }
+
+            carrinho.forEach(itemNome => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item';
+                itemDiv.innerHTML = `<span>🧁 ${itemNome}</span> <span>(1 unidade)</span>`;
+                cartList.appendChild(itemDiv);
+            });
+        }
+
+        function limparCarrinho() {
+            localStorage.removeItem('carrinho');
+            loadCarrinho();
+            alert("Carrinho limpo!");
+            document.querySelector('a[href="carrinho.html"]').textContent = 'Carrinho (0)';
+        }
+    </script>
+</body>
+</html>

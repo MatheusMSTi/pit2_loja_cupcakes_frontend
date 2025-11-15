@@ -39,5 +39,13 @@ async function fetchCupcakes() {
 }
 
 function adicionarAoCarrinho(nomeCupcake) {
-    alert(`"${nomeCupcake}" adicionado ao carrinho! (Lógica de carrinho completa será implementada depois)`);
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    
+    carrinho.push(nomeCupcake);
+    
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    
+    alert(`"${nomeCupcake}" adicionado ao carrinho! Total de itens: ${carrinho.length}.`);
+    
+    document.querySelector('a[href="#"]').textContent = `Carrinho (${carrinho.length})`;
 }
