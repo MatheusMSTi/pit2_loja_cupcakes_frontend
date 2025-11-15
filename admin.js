@@ -33,7 +33,8 @@ addCupcakeForm.addEventListener('submit', async (e) => {
         nome: document.getElementById('nome').value,
         descricao: document.getElementById('descricao').value,
         preco: parseFloat(document.getElementById('preco').value),
-        estoque: parseInt(document.getElementById('estoque').value)
+        estoque: parseInt(document.getElementById('estoque').value),
+        foto_url: document.getElementById('foto_url').value || null
     };
 
     try {
