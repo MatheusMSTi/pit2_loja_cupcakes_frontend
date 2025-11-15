@@ -1,6 +1,3 @@
-// URL base da sua API (Back-end)
-// IMPORTANTE: Mude esta URL para o endereço da sua API quando ela estiver online!
-// Por enquanto, vamos usar o endereço local padrão do Flask:
 const API_URL = "http://127.0.0.1:5000/api/cupcakes";
 
 document.addEventListener('DOMContentLoaded', () => {
