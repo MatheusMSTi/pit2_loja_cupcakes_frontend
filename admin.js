@@ -27,7 +27,7 @@ addCupcakeForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     adminMessage.textContent = 'Adicionando produto...';
-    adminMessage.style.color = '#e91e63';
+    adminMessage.style.color = '#43b110ff';
 
     const novoCupcake = {
         nome: document.getElementById('nome').value,
