@@ -43,43 +43,58 @@
         <h2>Meu Carrinho de Compras</h2>
         <div class="cart-container">
             <div id="cart-list">
-                <p>O carrinho está vazio.</p>
-            </div>
-            <button onclick="limparCarrinho()">Limpar Carrinho</button>
+            <p>O carrinho está vazio.</p>
         </div>
-    </main>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="limparCarrinho()">Limpar Carrinho</button>
+            
+            <button id="checkout-button" onclick="continuarParaPagamento()" style="background-color: #e91e63; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; margin-left: 10px; display: none;">
+                Continuar para Pagamento
+            </button>
+        </div>
+    </div>
+</main>
 
     <footer>
         <p>&copy; 2025 Loja de Cupcakes. PIT2.</p>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', loadCarrinho);
+    document.addEventListener('DOMContentLoaded', loadCarrinho);
 
-        function loadCarrinho() {
-            const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-            const cartList = document.getElementById('cart-list');
-            cartList.innerHTML = ''; 
+    function loadCarrinho() {
+        const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        const cartList = document.getElementById('cart-list');
+        const checkoutButton = document.getElementById('checkout-button');
 
-            if (carrinho.length === 0) {
-                cartList.innerHTML = '<p style="text-align: center;">O carrinho está vazio. Adicione um cupcake!</p>';
-                return;
-            }
+        cartList.innerHTML = ''; 
 
-            carrinho.forEach(itemNome => {
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'cart-item';
-                itemDiv.innerHTML = `<span>🧁 ${itemNome}</span> <span>(1 unidade)</span>`;
-                cartList.appendChild(itemDiv);
-            });
+        if (carrinho.length === 0) {
+            cartList.innerHTML = '<p style="text-align: center;">O carrinho está vazio. Adicione um cupcake!</p>';
+            checkoutButton.style.display = 'none';
+            return;
         }
 
-        function limparCarrinho() {
-            localStorage.removeItem('carrinho');
-            loadCarrinho();
-            alert("Carrinho limpo!");
-            document.querySelector('a[href="carrinho.html"]').textContent = 'Carrinho (0)';
-        }
-    </script>
+        checkoutButton.style.display = 'inline-block';
+        
+        carrinho.forEach(itemNome => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'cart-item';
+            itemDiv.innerHTML = `<span>🧁 ${itemNome}</span> <span>(1 unidade)</span>`;
+            cartList.appendChild(itemDiv);
+        });
+    }
+
+    function limparCarrinho() {
+        localStorage.removeItem('carrinho');
+        loadCarrinho();
+        alert("Carrinho limpo!");
+    }
+    
+    function continuarParaPagamento() {
+        window.location.href = 'pagamento.html';
+    }
+</script>
 </body>
 </html>
