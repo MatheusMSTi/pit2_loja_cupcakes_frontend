@@ -26,6 +26,7 @@ async function fetchCupcakes() {
             const card = document.createElement('div');
             card.className = 'cupcake-card';
             card.innerHTML = `
+                ${cupcake.foto_url ? `<img src="${cupcake.foto_url}" alt="${cupcake.nome}">` : ''}
                 <h3>${cupcake.nome}</h3>
                 <p>${cupcake.descricao}</p>
                 <p>Preço: R$ ${cupcake.preco.toFixed(2)}</p>
