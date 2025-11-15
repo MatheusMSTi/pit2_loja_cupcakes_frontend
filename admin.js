@@ -1,4 +1,3 @@
-
 const API_CUPCAKE_URL = "http://127.0.0.1:5000/api/cupcakes";
 
 const adminPanel = document.getElementById('admin-panel');
@@ -6,6 +5,10 @@ const accessDenied = document.getElementById('access-denied');
 const addCupcakeForm = document.getElementById('add-cupcake-form');
 const adminMessage = document.getElementById('admin-message');
 const logoutButton = document.getElementById('logout-button');
+
+const deleteCupcakeForm = document.getElementById('delete-cupcake-form');
+const deleteMessage = document.getElementById('delete-message');
+
 
 function checkAdminStatus() {
     const token = localStorage.getItem('access_token');
@@ -22,6 +25,7 @@ function checkAdminStatus() {
         accessDenied.style.display = 'block';
     }
 }
+
 
 addCupcakeForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -65,6 +69,45 @@ addCupcakeForm.addEventListener('submit', async (e) => {
     } catch (error) {
         adminMessage.textContent = 'Erro de conexão ou rede.';
         adminMessage.style.color = 'red';
+        console.error('Erro de rede:', error);
+    }
+});
+
+
+deleteCupcakeForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const cupcakeId = document.getElementById('cupcake-id').value;
+    
+    deleteMessage.textContent = 'Removendo produto...';
+    deleteMessage.style.color = '#f44336';
+
+    try {
+        const response = await fetch(`${API_CUPCAKE_URL}/${cupcakeId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${window.adminToken}` 
+            }
+        });
+
+        const data = await response.json();
+
+        if (response.status === 200) {
+            deleteMessage.textContent = `Sucesso! Cupcake ID ${cupcakeId} deletado. Recarregue a vitrine para verificar.`;
+            deleteMessage.style.color = 'green';
+            deleteCupcakeForm.reset();
+
+        } else if (response.status === 404) {
+            deleteMessage.textContent = `Erro 404: Cupcake ID ${cupcakeId} não encontrado.`;
+            deleteMessage.style.color = 'red';
+        } else {
+            deleteMessage.textContent = `Erro: ${data.msg || 'Falha ao deletar'}`;
+            deleteMessage.style.color = 'red';
+        }
+
+    } catch (error) {
+        deleteMessage.textContent = 'Erro de conexão ou rede.';
+        deleteMessage.style.color = 'red';
         console.error('Erro de rede:', error);
     }
 });
