@@ -40,13 +40,15 @@
     </header>
 
     <main>
-        <h2>Meu Carrinho de Compras</h2>
-        <div class="cart-container">
-            <div id="cart-list">
+    <h2>Meu Carrinho de Compras</h2>
+    
+    <div class="cart-container">
+        
+        <div id="cart-list">
             <p>O carrinho está vazio.</p>
         </div>
         
-        <div style="text-align: center; margin-top: 20px;">
+        <div style="text-align: center; margin-top: 20px; display: flex; justify-content: center;"> 
             <button onclick="limparCarrinho()">Limpar Carrinho</button>
             
             <button id="checkout-button" onclick="continuarParaPagamento()" style="background-color: #e91e63; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; margin-left: 10px; display: none;">
@@ -54,7 +56,13 @@
             </button>
         </div>
     </div>
-</main>
+    </main>
+
+<nav>
+    <a href="index.html">Catálogo</a>
+    <a href="carrinho.html">Carrinho</a>
+    <a href="login.html">Login/Admin</a>
+</nav>
 
     <footer>
         <p>&copy; 2025 Loja de Cupcakes. PIT2.</p>
