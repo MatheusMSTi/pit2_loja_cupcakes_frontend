@@ -1,4 +1,3 @@
-
 const API_LOGIN_URL = "http://127.0.0.1:5000/api/login";
 const loginForm = document.getElementById('login-form');
 const loginMessage = document.getElementById('login-message');
@@ -10,7 +9,7 @@ loginForm.addEventListener('submit', async (e) => {
     const password = document.getElementById('password').value;
 
     loginMessage.textContent = 'Autenticando...';
-    loginMessage.style.color = '#0a960aff';
+    loginMessage.style.color = '#555555';
 
     try {
         const response = await fetch(API_LOGIN_URL, {
