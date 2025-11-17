@@ -1,14 +1,23 @@
 const API_URL = "http://127.0.0.1:5000/api/cupcakes";
 
+function updateCartCount() {
+    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    const carrinhoLink = document.getElementById('carrinho-contador'); 
+    
+    if (carrinhoLink) {
+        carrinhoLink.textContent = `Carrinho (${carrinho.length})`;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     fetchCupcakes();
+    updateCartCount();
 });
 
 async function fetchCupcakes() {
     const vitrine = document.getElementById('vitrine');
     
     try {
-
         const response = await fetch(API_URL);
         
         if (!response.ok) {
@@ -47,5 +56,5 @@ function adicionarAoCarrinho(nomeCupcake) {
     
     alert(`"${nomeCupcake}" adicionado ao carrinho! Total de itens: ${carrinho.length}.`);
     
-    document.querySelector('a[href="#"]').textContent = `Carrinho (${carrinho.length})`;
+    updateCartCount(); 
 }
